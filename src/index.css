@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-950 text-slate-100 font-sans;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0b0f17;
+}
+::-webkit-scrollbar-thumb {
+  background: #222f46;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #324564;
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: rgba(16, 22, 34, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-elevated {
+  background: rgba(22, 31, 48, 0.92);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+}
+
+/* Emergency Corridor Glowing Animation */
+.corridor-glow {
+  filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.85)) drop-shadow(0 0 20px rgba(34, 197, 94, 0.4));
+  animation: corridorPulse 2s infinite ease-in-out;
+}
+
+@keyframes corridorPulse {
+  0%, 100% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.75));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(34, 197, 94, 0.95)) drop-shadow(0 0 24px rgba(74, 222, 128, 0.6));
+  }
+}
+
+/* Leaflet Container Adjustments */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background-color: #0b0f17 !important;
+  font-family: inherit;
+}
+
+/* Dark theme tiles adjustment if standard OSM is loaded */
+.dark-tiles .leaflet-tile {
+  filter: brightness(0.65) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+}
+
+/* Custom Marker CSS */
+.ambulance-marker-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease-out;
+}
+
+.siren-aura {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.5) 0%, rgba(59, 130, 246, 0.3) 50%, transparent 70%);
+  animation: sirenAura 0.8s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes sirenAura {
+  0% { transform: scale(0.85); opacity: 0.4; }
+  100% { transform: scale(1.4); opacity: 0.9; }
+}
+
+/* Pulse animation for Emergency Beacon */
+@keyframes beaconPulse {
+  0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 16px rgba(239, 68, 68, 0); }
+  100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.beacon-pulse {
+  animation: beaconPulse 1.8s infinite;
+}
